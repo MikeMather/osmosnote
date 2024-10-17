@@ -110,6 +110,14 @@ export class CommandBarComponent extends HTMLElement {
 		this.handleEvents();
 	}
 
+	toggleCommandMode() {
+		if (this.dataset.active) {
+			this.exitCommandMode();
+		} else {
+			this.enterCommandMode()
+		}
+	}
+
 	enterCommandMode(initialInput?: string) {
 		this.dataset.active = "true";
 		this.commandInputDom.tabIndex = 0; // make it focusable AFTER command mode starts. Otherwise, we will trap focus for the rest of the window
@@ -161,7 +169,16 @@ export class CommandBarComponent extends HTMLElement {
 	}
 
 	private handleEvents() {
-		this.addEventListener("focusout", (event) => {
+		this.addEventListener('click', (e) => {
+			const clicked = e.target as MenuRowComponent;
+			const event = new KeyboardEvent('Enter', { key: 'Enter' });
+			const key = clicked.innerText.split('[')[1].split(']')[0];
+			const target = this.commandOptionsDom.querySelector(`s2-menu-row[data-command-key="${key}"]`) as MenuRowComponent;
+			if (!target) return;
+			const handled = this.handleOptionKeydown({ optionDom: target, event });
+		});
+
+		this.commandOptionsDom.addEventListener("focusout", (event) => {
 			if (this.contains(event.relatedTarget as Node)) return;
 
 			this.exitCommandMode();
@@ -327,7 +344,7 @@ export class CommandBarComponent extends HTMLElement {
 	private handleOptionKeydown(props: { optionDom: MenuRowComponent; event: KeyboardEvent }): boolean {
 		const targetDataset = props.optionDom.dataset;
 		const e = props.event;
-
+		console.log(targetDataset, e);
 		if (e.key === "Enter") {
 			if (targetDataset.commandKey) {
 				this.commandInputDom.value = this.commandInputDom.value + targetDataset.commandKey;

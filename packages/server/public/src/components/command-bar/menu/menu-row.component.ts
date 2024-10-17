@@ -44,4 +44,10 @@ export class MenuRowComponent extends HTMLElement {
     ${tagsHTML}
     </div>`;
   }
+
+  disconnectedCallback() {
+    this.removeEventListener('click', () => {
+      console.log('clicked');
+    });
+  }
 }

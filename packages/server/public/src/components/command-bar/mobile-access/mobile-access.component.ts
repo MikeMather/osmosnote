@@ -6,8 +6,8 @@ import { ComponentRefService } from "../../../services/component-reference/compo
 
     private button: HTMLButtonElement | null = null;
 
-    openCommandBar() {
-      di.getSingleton(ComponentRefService).commandBar.enterCommandMode();
+    toggleCommandBar() {
+      di.getSingleton(ComponentRefService).commandBar.toggleCommandMode();
     }
 
     connectedCallback() {
@@ -16,11 +16,11 @@ import { ComponentRefService } from "../../../services/component-reference/compo
       </div>`;
 
       this.button = this.querySelector("#mobile-cmdbar-access") as HTMLButtonElement;
-      this.button.addEventListener('click', this.openCommandBar)
+      this.button.addEventListener('click', this.toggleCommandBar)
     }
 
     disconnectedCallback() {
-        this.button?.removeEventListener('click', this.openCommandBar);
+        this.button?.removeEventListener('click', this.toggleCommandBar);
     }
   }
   
