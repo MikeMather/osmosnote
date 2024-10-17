@@ -1,4 +1,5 @@
 import { CommandBarComponent } from "../../components/command-bar/command-bar.component.js";
+import { MobileAccessComponent } from "../../components/command-bar/mobile-access/mobile-access.component.js";
 import { ReferencePanelComponent } from "../../components/reference-panel/reference-panel.component.js";
 import { StatusBarComponent } from "../../components/status-bar/status-bar.component.js";
 import { CaretService } from "../../components/text-editor/caret.service.js";
@@ -66,3 +67,4 @@ customElements.define("s2-command-bar", CommandBarComponent);
 customElements.define("s2-status-bar", StatusBarComponent);
 customElements.define("s2-text-editor", TextEditorComponent);
 customElements.define("s2-reference-panel", ReferencePanelComponent);
+customElements.define("s2-mobile-access-menu", MobileAccessComponent)

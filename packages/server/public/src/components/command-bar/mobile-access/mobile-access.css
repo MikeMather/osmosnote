@@ -1,0 +1,23 @@
+
+
+.mobile-cmdbar-access {
+    display: none;
+    position: fixed;
+    bottom: 25px;
+    right: 0;
+    height: 25px;
+    width: 100px;
+    background-color: var(--theme-title-color);
+    color: var(--theme-text-color-knockout);
+    padding: 5px;
+    box-sizing: border-box;
+    font-size: 14px;
+    font-weight: bold;
+    text-align: center;
+}
+
+@media (max-width: 769px) {
+    .mobile-cmdbar-access {
+        display: block;
+    }
+  }
